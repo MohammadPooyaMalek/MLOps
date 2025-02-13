@@ -8,6 +8,7 @@ cd ~/ml_models
 python -m venv ml_models
 pip install -r requirements.txt
 ## Training the model(RFR)
+jupyter notebook --ip=0.0.0.0 --port=2501 --no-browser
 python model_training.py # to create pkl model
 ```
 ## building docker image to make it CloudNative app/Portable!
