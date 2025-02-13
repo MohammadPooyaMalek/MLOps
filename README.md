@@ -25,3 +25,13 @@ kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ### curl -X POST http://127.0.0.1:32400/predict -H "Content-Type: application/json" -d '{"features": [8.3252, 41, 6.984, 1.023, 322, 2.555, 37.88, -122.23]}'
 ```
+
+
+## Installing Kubeflow
+```sh
+export PIPELINE_VERSION=2.3.0
+kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/cluster-scoped-resources?ref=$PIPELINE_VERSION"
+kubectl wait --for condition=established --timeout=60s crd/applications.app.k8s.io
+kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/env/dev?ref=$PIPELINE_VERSION"
+kubectl port-forward -n kubeflow svc/ml-pipeline-ui 8080:80
+```
